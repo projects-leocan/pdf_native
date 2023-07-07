@@ -1,6 +1,10 @@
+var admin = require("firebase-admin");
+var serviceAccount = require("./firbase-pdfupload.json");
+
 const Chart = require('chart.js');
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
+var path = require('path');
 
 // Create a new PDF document
 const doc = new PDFDocument();
@@ -11,19 +15,27 @@ const canvas = createCanvas(400, 300);
 const ctx = canvas.getContext('2d');
 
 const invoice = {
-    items: [
-      {
-        videoUrl: "https:2000.com",
-        description: "Toner Cartridge",
-        viewCount: 2,
-      },
-      {
-        videoUrl: "https:2000.com",
-        description: "Toner Cartridge",
-        viewCount: 2,
-      }
-    ]
-  };
+  items: [
+    {
+      videoUrl: "https:2000.com",
+      description: "Toner Cartridge",
+      viewCount: 2,
+    },
+    {
+      videoUrl: "https:2000.com",
+      description: "Toner Cartridge",
+      viewCount: 2,
+    }
+  ]
+};
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: "firbase-pdfupload.appspot.com/"
+});
+
+
+var bucket = admin.storage().bucket();
 
 
 function createInvoice(invoice, path) {
@@ -109,7 +121,7 @@ const chart = new Chart(ctx, {
     maintainAspectRatio: true,
   },
 });
-        
+
 // Create a PDF file and write the graph to it
 doc.pipe(fs.createWriteStream('pdfData.pdf'));
 
@@ -128,7 +140,7 @@ doc.image(chartImage, {
 
 doc
   .fontSize(25)
-  .text('Exercise Video', 50 ,450 );
+  .text('Exercise Video', 50, 450);
 
 createInvoice(invoice)
 
@@ -136,4 +148,25 @@ createInvoice(invoice)
 // Finalize the PDF document
 doc.end();
 
-console.log('PDF generated successfully!');
+
+// Function to upload PDF file to Firebase Storage
+async function uploadPDF(filePath, destinationPath) {
+  try {
+    await bucket.upload(filePath, {
+      destination: destinationPath,
+      metadata: {
+        contentType: 'application/pdf'
+      }
+    });
+  } catch (error) {
+    console.error('Error uploading PDF:', error);
+  }
+}
+
+// Usage example
+var filePath = path.join(__dirname, 'pdfData.pdf');
+
+const destinationPath = `native_pdf/${Math.floor(new Date().getTime() / 1000.0)}.pdf`;
+setTimeout(() => {
+  uploadPDF(filePath, destinationPath);
+}, 10000);

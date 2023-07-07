@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "firbase-pdfupload",
+  "private_key_id": "fa1e52d84db18bc8a7aa0fde1f3c2379ed2d3cbf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDDRfRepubZK3FR\ngl8wZ155Gkhj7g8ANmcNr/JRao2jfccaQ1gGJKbHWEgA0iQgXAJ9MYzDcUKy0vXc\nPFPD7vzyrCoDS0sxtEvR3TdM4AGGJ6jpe1VOJOmasFuxM7mLuO0p+rJLTnY3qNTS\nJtBiAe+419O7zVZv06mnI4qya2a9odmYT7Z/fy82ifLox9Ftu+IPf/00ZVXD0oaw\nhngm6kFk3HG591EjBDzcUAH5yQkxE+thLzBrffRgRWXMyEuVViYBhu7Ho5Zi7Kmp\nY9vnBtRvpozaRTjmm9MFqXVv36XpzOEn+XRbavevsEuVsMI5Q2H3/poLdC6q1zTo\n7mIokPdnAgMBAAECggEAGo/hdclDjYxDQHsjckodUmEo3QRSNg0wZ27k31OcgKi9\n9JdEhKa8/lDGj+tbJAEKtaI6gOYJ1JlYUuTsirJvkJ2qpAK8mmjpXLANXapQNWzK\nT+Le77TwXIJbdqHlPgRMU8bY3zWFDyfVYIthvR3WUKZ1vri9ET5mzWggQwoo/Oen\nr4xVRR7rfJwB0Wa0Kp7kqt7OTJUUWDpzNFpxxRhXGhugWwiVteKQxxFs+wOhhxdH\nl8CKTsS002KAbiE/3KIeir93vI6SvugUhA7JpUT7p3ie9ahDQzvtrBMF/jJgrvHd\nnp/UarNLHWiGImzXnyRdfydWHdof6P9B2ULot/4CwQKBgQDiLikzll/KZ2Zo42Kd\nQvEjTdAZh1I/EG5UHIXiUO9qfa2YViMFDEG/Mc5Audxn7F0yehDYC7pjSOzQdYd/\nJKEDDxwZScbG7pfCSP6wehqjEgKR/vhe3p+QFPy/RON4MFSJC0rV5loQwgt7xoWR\n5URmGNwcGrVJyinXUpMGl+l5kwKBgQDdBKVW1ioFSqxt1pdbB9x0gH7/wmtbPRz1\nRglyFlI/XJM/qPO/15M0Qeoq4FZoI8MW0K1pAuc5tpIjEYTbgqWAAKQyMELVClfe\nX+rdMxGwgqh3a/pta3u82iQJhrb7/MkUU5XMBmtTpheTr/4aKMSmxOID4R3qOZur\nwi0MOT0fXQKBgQCoKngZ0glgvSZof//3Oyl8/ULnaDSfjQDq6tYkodaQj+b9J7Yb\n77QGiup2N3qHjjbw688QQxAO986TY38d6kcItjhHGRKBIC6Xlpw+7FpXunFMyY0z\nRETQ5LnTIE4cM5r21f2LMhzu7seI/N6cziDf5EXrY3Q86+HWJaAJO/OsnwKBgQDS\nRgxDvIfH9w5rhaEEU0tTb7jj/YWEDXWSiOqNp1ziuWHCTCxzFVcQfbGaz0qF05hV\nCX4iDUgNqXwJby52ZSqtyG5u7Wl4JFoK0Diz8FVhGD3NOGbOWVclCmkEwy0uOobY\nFtnKfUT5FWkS8nqPSsAlZeUeCbwbTmmjlJ6lJYPYZQKBgDzhVaPYIyIULW89TMGq\nRu5YTus1ObXe2S/IY+E8wOIE9m0QrGNVgZvhz6PrBsHNhLQACC9rGdPysSOdGMbg\nOLPOR3LK8GKhWvrY92fxmY67JiKBdJ1R+4fZ2tyirzBkFqgIBJ33djEH+sGd7u4C\nN/r+QGwlpnOq8d9Nd4YRDjhV\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-8j5ml@firbase-pdfupload.iam.gserviceaccount.com",
+  "client_id": "101457250617648459395",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-8j5ml%40firbase-pdfupload.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
