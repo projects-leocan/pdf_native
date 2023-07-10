@@ -5,12 +5,12 @@ const Chart = require('chart.js');
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 var path = require('path');
+const { createCanvas } = require('canvas');
 
 // Create a new PDF document
 const doc = new PDFDocument();
 
 // Create a canvas element using the Chart.js node-canvas module
-const { createCanvas, registerFont } = require('canvas');
 const canvas = createCanvas(400, 300);
 const ctx = canvas.getContext('2d');
 
@@ -29,19 +29,18 @@ const invoice = {
   ]
 };
 
+//initialise firebase
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   storageBucket: "firbase-pdfupload.appspot.com/"
 });
-
-
+//initialise firebase storage
 var bucket = admin.storage().bucket();
 
 
 function createInvoice(invoice, path) {
   generateInvoiceTable(doc, invoice);
 }
-
 
 function generateInvoiceTable(doc, invoice) {
   let i;
@@ -57,7 +56,6 @@ function generateInvoiceTable(doc, invoice) {
   );
   generateHr(doc, invoiceTableTop + 20);
   doc.font("Helvetica");
-
   for (i = 0; i < invoice.items.length; i++) {
     const item = invoice.items[i];
     const position = invoiceTableTop + (i + 1) * 30;
@@ -72,7 +70,6 @@ function generateInvoiceTable(doc, invoice) {
     generateHr(doc, position + 20);
   }
 }
-
 
 function generateTableRow(
   doc,
@@ -122,31 +119,55 @@ const chart = new Chart(ctx, {
   },
 });
 
-// Create a PDF file and write the graph to it
-doc.pipe(fs.createWriteStream('pdfData.pdf'));
-
-// Draw the chart onto the PDF document
-const chartImage = new Buffer(canvas.toDataURL().split(',')[1], 'base64');
-
-doc
-  .fontSize(25)
-  .text('Total Walking Distance', 50, 50);
-
-doc.image(chartImage, {
-  fit: [400, 300],
-  align: 'center',
-  valign: 'center',
-});
-
-doc
-  .fontSize(25)
-  .text('Exercise Video', 50, 450);
-
-createInvoice(invoice)
 
 
-// Finalize the PDF document
-doc.end();
+async function generatePdf() {
+  (async () => {
+    try {
+
+      // Create a PDF file and write the graph to it
+      const savePdf = fs.createWriteStream('filename.pdf');
+
+      doc.pipe(savePdf);
+
+      // Draw the chart onto the PDF document
+      const chartImage = new Buffer.from(canvas.toDataURL().split(',')[1], 'base64');
+
+      doc
+        .fontSize(25)
+        .text('Total Walking Distance', 50, 50);
+
+      doc.image(chartImage, {
+        fit: [400, 300],
+        align: 'center',
+        valign: 'center',
+      });
+
+      doc
+        .fontSize(25)
+        .text('Exercise Video', 50, 450);
+
+      createInvoice(invoice)
+
+
+      // Finalize the PDF document
+      doc.end();
+
+      var filePath = path.join(__dirname, 'pdfData.pdf');
+      const destinationPath = `native_pdf/${Math.floor(new Date().getTime() / 1000.0)}.pdf`;
+
+      savePdf.on('finish', function () {
+        // do stuff with the PDF file
+        uploadPDF(filePath, destinationPath)
+
+      });
+    } catch (err) {
+    }
+  })()
+}
+
+//generate pdf
+generatePdf()
 
 
 // Function to upload PDF file to Firebase Storage
@@ -162,11 +183,3 @@ async function uploadPDF(filePath, destinationPath) {
     console.error('Error uploading PDF:', error);
   }
 }
-
-// Usage example
-var filePath = path.join(__dirname, 'pdfData.pdf');
-
-const destinationPath = `native_pdf/${Math.floor(new Date().getTime() / 1000.0)}.pdf`;
-setTimeout(() => {
-  uploadPDF(filePath, destinationPath);
-}, 10000);
