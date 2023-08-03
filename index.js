@@ -142,7 +142,7 @@ module.exports.pdf = async (event, context) => {
       try {
 
         // Create a PDF file and write the graph to it
-        const savePdf = fs.createWriteStream('filename.pdf');
+        const savePdf = fs.createWriteStream('pdfData.pdf');
 
         doc.pipe(savePdf);
 
@@ -174,7 +174,7 @@ module.exports.pdf = async (event, context) => {
 
         savePdf.on('finish', function () {
           // do stuff with the PDF file
-          uploadPDF(filePath, destinationPath);
+          // uploadPDF(filePath, destinationPath);
           context.succeed("successfully pdf generated");
         });
       } catch (err) {

@@ -1,28 +1,21 @@
-service:
-  name: PDF
-
-plugins:
-  - serverless-offline
-  - serverless-apigw-binary
+org: jhon1234
+app: pdf-generate-walk-a-cise
+service: pdf-generate-without-html-demo
+frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs8.10
-  region: eu-central-1
-  stage: ${opt:stage, 'development'}
-  environment:
-    ENV: ${self:provider.stage}
-
-custom:
-  apigwBinary:
-    types:
-      - '*/*'
+  runtime: nodejs14.x
+  region: eu-west-2
 
 functions:
   pdf:
-    handler: pdf.pdf
+    handler: index.pdf
     events:
       - http:
           path: pdf
           method: get
-          cors: true
+
+plugins:
+  - serverless-offline
+  
